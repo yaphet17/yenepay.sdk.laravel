@@ -79,11 +79,11 @@ class CheckoutOptions
     public function getSellerCode()
     {
         $sellerCode = config("yenepay.sellerCode");
-        if(is_null($sellerCode)){
+        if (is_null($sellerCode)) {
             throw new SellerCodeNotFoundException();
         }
 
-        return config("yenepay.sellerCode");
+        return $sellerCode;
     }
 
 

@@ -28,7 +28,7 @@ class YenePay
         // get the checkout items as key-value pair added with the checkoutOptions array
         $queryString = $item->getAsKeyValue($optionsDict);
         $queryString = http_build_query($queryString);
-        if (isInSandbox())
+        if ($this->isInSandbox())
             return self::CHECKOUTBASEURL_SANDBOX . '?' . $queryString;
         return self::CHECKOUTBASEURL_PROD . '?' . $queryString;
     }
@@ -46,7 +46,7 @@ class YenePay
             }
         }
         $queryString = http_build_query($optionsDict);
-        if (isInSandbox())
+        if ($this->isInSandbox())
             return self::CHECKOUTBASEURL_SANDBOX . '?' . $queryString;
         return self::CHECKOUTBASEURL_PROD . '?' . $queryString;
     }
@@ -55,7 +55,7 @@ class YenePay
     {
         //get ipnmodel dictionary
         $ipnDict = $ipnModel->getAsKeyValue();
-        $ipnUrl = isInSandbox() ? self::IPNVERIFYURL_SANDBOX : self::IPNVERIFYURL_PROD;
+        $ipnUrl = $this->isInSandbox() ? self::IPNVERIFYURL_SANDBOX : self::IPNVERIFYURL_PROD;
         try {
             $response = Http::acceptJson()->post($ipnUrl, $ipnDict);
             if ($response->status() == 200)
@@ -71,7 +71,7 @@ class YenePay
     {
         //get pdtmodel dictionary
         $pdtDict = $pdtModel->getAsKeyValue();
-        $pdtUrl = isInSandbox() ? self::PDTURL_SANDBOX : self::PDTURL_PROD;
+        $pdtUrl = $this->isInSandbox() ? self::PDTURL_SANDBOX : self::PDTURL_PROD;
         try {
             $response = Http::acceptJson()->post($pdtUrl, $pdtDict);
             return $response->throw()->body();
@@ -79,15 +79,12 @@ class YenePay
             $result['error'] = $e->getMessage();
             return $result;
         }
-        $result['result'] = "FAIL";
-        return $result;
     }
 
-    private function isInSandbox(){
+
+    private function isInSandbox()
+    {
         $env = strtoupper(config('yenepay.env'));
-        if($env == "SANDBOX"){
-            return true;
-        }
-        return false;
+        return $env == "SANDBOX";
     }
 }

@@ -19,9 +19,7 @@ class DemoController extends Controller
 
     public function hello(){
 
-        $sellerCode = env("SELLER_CODE");
-        $useSandbox = true;
-        $checkoutOptions = new CheckoutOptions($sellerCode, $useSandbox);
+        $checkoutOptions = new CheckoutOptions();
 
         $checkoutOrderItem = new CheckoutItem("NAME_OF_ITEM_PAID_FOR", "1", 1);
         $checkoutOrderItem  -> ItemId = "UNIQUE_ID_FOR_THE_ITEM";
@@ -29,14 +27,13 @@ class DemoController extends Controller
         $checkoutOrderItem  -> Tax1 = "10";
         $checkoutOrderItem  -> Tax2 = "10";
 
-        $checkoutOrderItems = [$checkoutOrderItem];
 
         $checkoutUrl = YenePay::getSingleCheckoutUrl($checkoutOptions, $checkoutOrderItem);
         $ipnModel = new IPN();
         $ipnModel = new PDT();
         $ipn = YenePay::isIPNAuthentic($ipnModel);
         $pdt = YenePay::requestPDT($ipnModel);
-        return config("yenepay.sellerCode");
+        return $ipn;
 
     }
 }
