@@ -1,0 +1,20 @@
+{
+    "name": "yenepay/laravel-sdk",
+    "description": "A Laravel SDK for YenePay payment gateway",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "YenePay\\YenePay\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yaphet17",
+            "email": "yafetberhanu3@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0.1"
+    }
+}
