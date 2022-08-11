@@ -22,7 +22,7 @@ class YenePay
 
     public function getSingleCheckoutUrl($checkoutOptions, $item)
     {
-        // get the checkoutOptions as key-value pair array
+        // get the checkoutOptions as associative array
         $optionsDict = $checkoutOptions->getAsKeyValue(false);
 
         // get the checkout items as key-value pair added with the checkoutOptions array
@@ -35,7 +35,7 @@ class YenePay
 
     public function getCartCheckoutUrl($checkoutOptions, $items)
     {
-        // get the checkoutOptions as key-value pair array
+        // get the checkoutOptions as associative array
         $optionsDict = $checkoutOptions->getAsKeyValue(true);
 
         // get the checkout items as key-value pair added with the checkoutOptions array
@@ -74,7 +74,6 @@ class YenePay
         $pdtUrl = (is_null($pdtModel->getUseSandbox()) && $pdtModel->getUseSandbox() == 'yes') ? self::PDTURL_SANDBOX : self::PDTURL_PROD;
         try {
             $response = Http::acceptJson()->post($pdtUrl, $pdtDict);
-            // throws exception if there is a client or a server error
             return $response->throw()->body();
         } catch (Exception $e) {
             $result['error'] = $e->getMessage();

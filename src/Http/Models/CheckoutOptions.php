@@ -7,21 +7,19 @@ namespace YenePay\YenePay\Http\Models;
  */
 class CheckoutOptions
 {
-    private  $sellerCode;
-    private  $process;
-    private  $merchantOrderId;
-    private  $expiresAfter;
-    private  $ipnUrl;
-    private  $successUrl;
-    private  $failureUrl;
-    private  $cancelUrl;
-    private  $useSandbox;
-    private  $totalItemsTax1;
-    private  $totalItemsTax2;
-    private  $totalItemsDeliveryFee;
-    private  $totalItemsHandlingFee;
-    private  $totalItemsDiscount;
-    private  $currency;
+    private $process;
+    private $merchantOrderId;
+    private $expiresAfter;
+    private $ipnUrl;
+    private $successUrl;
+    private $failureUrl;
+    private $cancelUrl;
+    private $totalItemsTax1;
+    private $totalItemsTax2;
+    private $totalItemsDeliveryFee;
+    private $totalItemsHandlingFee;
+    private $totalItemsDiscount;
+    private $currency;
 
     private $supported_currencies = array('ETB', 'USD', 'EUR', 'GBP');
 
@@ -29,36 +27,24 @@ class CheckoutOptions
     {
         $a = func_get_args();
         $i = func_num_args();
-        if (method_exists($this,$f='__construct'.$i)) {
-            call_user_func_array(array($this,$f),$a);
+        if (method_exists($this, $f = '__construct' . $i)) {
+            call_user_func_array(array($this, $f), $a);
         }
     }
 
     function __construct0()
     {
-        $this->useSandbox = false;
         $this->process = CheckoutType::Express;
     }
 
-    function __construct2($sellerCode, $useSandbox)
-    {
-        $this->useSandbox = $useSandbox;
-        $this->sellerCode = $sellerCode;
-        $this->process = CheckoutType::Express;
-    }
-
-    function __construct9($sellerCode,
-                          $process,
+    function __construct9($process,
                           $merchantOrderId,
                           $expiresAfter,
                           $ipnUrl,
                           $successUrl,
                           $failureUrl,
-                          $cancelUrl,
-                          $useSandbox)
+                          $cancelUrl)
     {
-        $this->useSandbox = $useSandbox;
-        $this->sellerCode = $sellerCode;
         $this->process = $process;
         $this->merchantOrderId = $merchantOrderId;
         $this->expiresAfter = $expiresAfter;
@@ -68,43 +54,17 @@ class CheckoutOptions
         $this->cancelUrl = $cancelUrl;
     }
 
-    function __construct10($sellerCode,
-                           $process,
+    function __construct10($process,
                            $merchantOrderId,
                            $expiresAfter,
                            $ipnUrl,
                            $successUrl,
                            $failureUrl,
                            $cancelUrl,
-                           $useSandbox,
                            $currency)
     {
-        __construct9($sellerCode, $process, $merchantOrderId, $expiresAfter, $ipnUrl, $successUrl, $failureUrl, $cancelUrl, $useSandbox);
+        __construct9($process, $merchantOrderId, $expiresAfter, $ipnUrl, $successUrl, $failureUrl, $cancelUrl);
         $this->currency = $currency;
-    }
-
-
-    /**
-     * An all numeral unique seller code used to uniquely identify a merchant on YenePay
-     *
-     * @param string $sellerCode
-     *
-     * @return $this
-     */
-    public function setSellerCode($sellerCode)
-    {
-        $this->sellerCode = $sellerCode;
-        return $this;
-    }
-
-    /**
-     * An all numeral unique seller code used to uniquely identify a merchant on YenePay
-     *
-     * @return string
-     */
-    public function getSellerCode()
-    {
-        return $this->sellerCode;
     }
 
     /**
@@ -128,29 +88,6 @@ class CheckoutOptions
     public function getProcess()
     {
         return $this->process;
-    }
-
-    /**
-     * Use sandbox application or production server (set to true if testing)
-     *
-     * @param string $useSandbox
-     *
-     * @return $this
-     */
-    public function setUseSandbox($useSandbox)
-    {
-        $this->useSandbox = $useSandbox;
-        return $this;
-    }
-
-    /**
-     * Use sandbox application or production server (set to true if testing)
-     *
-     * @return string
-     */
-    public function getUseSandbox()
-    {
-        return $this->useSandbox;
     }
 
     /**
@@ -407,7 +344,7 @@ class CheckoutOptions
     }
 
     /**
-     * An all numeral unique seller code used to uniquely identify a merchant on YenePay
+     * Set currency code used for payment
      *
      * @param string $currency
      *
@@ -415,15 +352,14 @@ class CheckoutOptions
      */
     public function setCurrency($currency)
     {
-        if(in_array($currency, $this->supported_currencies))
-        {
+        if (in_array($currency, $this->supported_currencies)) {
             $this->currency = $currency;
             return $this;
         }
     }
 
     /**
-     * gets the current set currency of the transaction
+     * Get currency code used for payment
      *
      * @return string
      */
@@ -444,9 +380,9 @@ class CheckoutOptions
             "FailureUrl" => $this->getFailureUrl(),
             "Currency" => $this->getCurrency()
         );
-        if(is_null($this->getExpiresAfter()))
+        if (is_null($this->getExpiresAfter()))
             $dictionary["ExpiresAfter"] = $this->getExpiresAfter();
-        if($forCart){
+        if ($forCart) {
             $dictionary["TotalItemsTax1"] = $this->getTotalItemsTax1();
             $dictionary["TotalItemsTax2"] = $this->getTotalItemsTax2();
             $dictionary["TotalItemsHandlingFee"] = $this->getTotalItemsHandlingFee();
@@ -458,8 +394,7 @@ class CheckoutOptions
 
     function isValid()
     {
-        if( is_null($this->getProcess()) && is_null($this->getSellerCode()))
-        {
+        if (is_null($this->getProcess()) && is_null($this->getSellerCode())) {
             return true;
         }
 

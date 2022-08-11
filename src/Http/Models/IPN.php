@@ -21,8 +21,6 @@ class IPN
     private $status;
     private $currency;
     private $signature;
-    private $useSandbox;
-
 
     function __construct()
     {
@@ -53,7 +51,7 @@ class IPN
     }
 
     /**
-     * The customer's id on YenePay
+     * Set the customer's id on YenePay
      *
      * @param string $buyerId
      *
@@ -66,7 +64,7 @@ class IPN
     }
 
     /**
-     * The customer's id on YenePay
+     * Get the customer's id on YenePay
      *
      * @return string
      */
@@ -76,7 +74,7 @@ class IPN
     }
 
     /**
-     * Id that identifies the order on the merchant application
+     * Get id that identifies the order on the merchant application
      *
      * @param string $merchantOrderId
      *
@@ -89,7 +87,7 @@ class IPN
     }
 
     /**
-     * Id that identifies the order on the merchant application
+     * Get id that identifies the order on the merchant application
      *
      * @return string
      */
@@ -99,7 +97,7 @@ class IPN
     }
 
     /**
-     * The merchant's id on YenePay
+     * Set id merchant's id on YenePay
      *
      * @param string $merchantId
      *
@@ -112,7 +110,7 @@ class IPN
     }
 
     /**
-     * The merchant's id on YenePay
+     * Get the merchant's id on YenePay
      *
      * @return string
      */
@@ -122,7 +120,7 @@ class IPN
     }
 
     /**
-     * an identifier for the merchant assigned by YenePay
+     * Set an identifier for the merchant assigned by YenePay
      *
      * @param string $merchantCode
      *
@@ -135,7 +133,7 @@ class IPN
     }
 
     /**
-     * an identifier for the merchant assigned by YenePay
+     * Get an identifier for the merchant assigned by YenePay
      *
      * @return string
      */
@@ -145,7 +143,7 @@ class IPN
     }
 
     /**
-     * an identifier for the payment order assigned by YenePay
+     * Set an identifier for the payment order assigned by YenePay
      *
      * @param string $transactionId
      *
@@ -158,7 +156,7 @@ class IPN
     }
 
     /**
-     * an identifier for the payment order assigned by YenePay
+     * Get an identifier for the payment order assigned by YenePay
      *
      * @return string
      */
@@ -167,6 +165,11 @@ class IPN
         return $this->transactionId;
     }
 
+    /**
+     * Set an order code for the payment order assigned by YenePay
+     *
+     * @return $this
+     */
     public function setTransactionCode($transactionCode)
     {
         $this->transactionCode = $transactionCode;
@@ -174,7 +177,7 @@ class IPN
     }
 
     /**
-     * an order code for the payment order assigned by YenePay
+     * Get an order code for the payment order assigned by YenePay
      *
      * @return string
      */
@@ -184,7 +187,7 @@ class IPN
     }
 
     /**
-     * Order status value for the payment
+     * Set order status value for the payment
      *
      * @param string $status
      *
@@ -197,7 +200,7 @@ class IPN
     }
 
     /**
-     * Order status value for the payment
+     * Get order status value for the payment
      *
      * @return string
      */
@@ -207,7 +210,7 @@ class IPN
     }
 
     /**
-     * Currency code used for payment
+     * Set currency code used for payment
      *
      * @param string $currency
      *
@@ -220,7 +223,7 @@ class IPN
     }
 
     /**
-     * Currency code used for payment
+     * Get currency code used for payment
      *
      * @return string
      */
@@ -230,7 +233,7 @@ class IPN
     }
 
     /**
-     * digital signature of the ipn
+     * Set digital signature of the ipn
      *
      * @param string $signature
      *
@@ -243,36 +246,13 @@ class IPN
     }
 
     /**
-     * digital signature of the ipn
+     * Get digital signature of the ipn
      *
      * @return string
      */
     public function getSignature()
     {
         return $this->signature;
-    }
-
-    /**
-     * Use sandbox application or production server
-     *
-     * @param string $useSandbox
-     *
-     * @return $this
-     */
-    public function setUseSandbox($useSandbox)
-    {
-        $this->useSandbox = $useSandbox;
-        return $this;
-    }
-
-    /**
-     * Use sandbox application or production server
-     *
-     * @return string
-     */
-    public function getUseSandbox()
-    {
-        return $this->useSandbox;
     }
 
     public function getAsKeyValue()
@@ -298,8 +278,6 @@ class IPN
             $dictionary["Currency"] = $this->getCurrency();
         if (is_null($this->getSignature()))
             $dictionary["Signature"] = $this->getSignature();
-        if (is_null($this->getUseSandbox()))
-            $dictionary["UseSandbox"] = $this->getUseSandbox();
 
         return $dictionary;
     }

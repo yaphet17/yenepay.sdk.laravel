@@ -12,26 +12,24 @@ namespace YenePay\YenePay\Http\Models;
  * @property string requestType
  * @property string pdtToken
  * @property string transactionId
- * @property boolean useSandbox
  * @property string merchantOrderId
  */
-
 class PDT
 {
-    private  $requestType;
-    private  $pdtToken;
-    private  $transactionId;
-    private  $useSandbox;
-    private  $merchantOrderId;
+    private $requestType;
+    private $pdtToken;
+    private $transactionId;
+    private $merchantOrderId;
 
     function __construct()
     {
         $a = func_get_args();
         $i = func_num_args();
-        if (method_exists($this,$f='__construct'.$i)) {
-            call_user_func_array(array($this,$f),$a);
+        if (method_exists($this, $f = '__construct' . $i)) {
+            call_user_func_array(array($this, $f), $a);
         }
     }
+
     function __construct1($pdtToken)
     {
         $this->pdtToken = $pdtToken;
@@ -123,29 +121,6 @@ class PDT
     }
 
     /**
-     * Use sandbox application or production server
-     *
-     * @param string $useSandbox
-     *
-     * @return $this
-     */
-    public function setUseSandbox($useSandbox)
-    {
-        $this->useSandbox = $useSandbox;
-        return $this;
-    }
-
-    /**
-     * Use sandbox application or production server
-     *
-     * @return string
-     */
-    public function getUseSandbox()
-    {
-        return $this->useSandbox;
-    }
-
-    /**
      * Set the merchant order id
      *
      * @param string $merchantOrderId
@@ -171,13 +146,13 @@ class PDT
     public function getAsKeyValue()
     {
         $dictionary = array();
-        if(is_null($this->getRequestType()))
+        if (is_null($this->getRequestType()))
             $dictionary["RequestType"] = $this->getRequestType();
-        if(is_null($this->getPDTToken()))
+        if (is_null($this->getPDTToken()))
             $dictionary["PdtToken"] = $this->getPDTToken();
-        if(is_null($this->getTransactionId()))
+        if (is_null($this->getTransactionId()))
             $dictionary["TransactionId"] = $this->getTransactionId();
-        if(is_null($this->getMerchantOrderId()))
+        if (is_null($this->getMerchantOrderId()))
             $dictionary["MerchantOrderId"] = $this->getMerchantOrderId();
 
         return $dictionary;
