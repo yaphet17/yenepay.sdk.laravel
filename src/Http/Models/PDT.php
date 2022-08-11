@@ -171,13 +171,13 @@ class PDT
     public function getAsKeyValue()
     {
         $dictionary = array();
-        if(null != $this->getRequestType())
+        if(is_null($this->getRequestType()))
             $dictionary["RequestType"] = $this->getRequestType();
-        if(null != $this->getPDTToken())
+        if(is_null($this->getPDTToken()))
             $dictionary["PdtToken"] = $this->getPDTToken();
-        if(null != $this->getTransactionId())
+        if(is_null($this->getTransactionId()))
             $dictionary["TransactionId"] = $this->getTransactionId();
-        if(null != $this->getMerchantOrderId())
+        if(is_null($this->getMerchantOrderId()))
             $dictionary["MerchantOrderId"] = $this->getMerchantOrderId();
 
         return $dictionary;

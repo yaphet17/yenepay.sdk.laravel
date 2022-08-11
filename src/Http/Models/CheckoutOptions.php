@@ -444,7 +444,7 @@ class CheckoutOptions
             "FailureUrl" => $this->getFailureUrl(),
             "Currency" => $this->getCurrency()
         );
-        if(null != $this->getExpiresAfter())
+        if(is_null($this->getExpiresAfter()))
             $dictionary["ExpiresAfter"] = $this->getExpiresAfter();
         if($forCart){
             $dictionary["TotalItemsTax1"] = $this->getTotalItemsTax1();
@@ -458,7 +458,7 @@ class CheckoutOptions
 
     function isValid()
     {
-        if( $this->getProcess() != null && $this->getSellerCode() != null)
+        if( is_null($this->getProcess()) && is_null($this->getSellerCode()))
         {
             return true;
         }

@@ -278,27 +278,27 @@ class IPN
     public function getAsKeyValue()
     {
         $dictionary = array();
-        if (null != $this->getTotalAmount())
+        if (is_null($this->getTotalAmount()))
             $dictionary["TotalAmount"] = $this->getTotalAmount();
-        if (null != $this->getBuyerId())
+        if (is_null($this->getBuyerId()))
             $dictionary["BuyerId"] = $this->getBuyerId();
-        if (null != $this->getMerchantOrderId())
+        if (is_null($this->getMerchantOrderId()))
             $dictionary["MerchantOrderId"] = $this->getMerchantOrderId();
-        if (null != $this->getMerchantCode())
+        if (is_null($this->getMerchantCode()))
             $dictionary["MerchantCode"] = $this->getMerchantCode();
-        if (null != $this->getMerchantId())
+        if (is_null($this->getMerchantId()))
             $dictionary["MerchantId"] = $this->getMerchantId();
-        if (null != $this->getTransactionCode())
+        if (is_null($this->getTransactionCode()))
             $dictionary["TransactionCode"] = $this->getTransactionCode();
-        if (null != $this->getTransactionId())
+        if (is_null($this->getTransactionId()))
             $dictionary["TransactionId"] = $this->getTransactionId();
-        if (null != $this->getStatus())
+        if (is_null($this->getStatus()))
             $dictionary["Status"] = $this->getStatus();
-        if (null != $this->getCurrency())
+        if (is_null($this->getCurrency()))
             $dictionary["Currency"] = $this->getCurrency();
-        if (null != $this->getSignature())
+        if (is_null($this->getSignature()))
             $dictionary["Signature"] = $this->getSignature();
-        if (null != $this->getUseSandbox())
+        if (is_null($this->getUseSandbox()))
             $dictionary["UseSandbox"] = $this->getUseSandbox();
 
         return $dictionary;
