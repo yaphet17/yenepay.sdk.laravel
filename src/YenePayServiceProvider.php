@@ -12,7 +12,6 @@ class YenePayServiceProvider extends ServiceProvider
             __DIR__.'/../config/yenepay.php' => config_path('yenepay.php'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__ . "/routes/web.php");
     }
 
     public function register()
