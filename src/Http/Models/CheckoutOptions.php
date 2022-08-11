@@ -2,6 +2,8 @@
 
 namespace YenePay\YenePay\Http\Models;
 
+use YenePay\YenePay\Exceptions\SellerCodeNotFoundException;
+
 /**
  * @package YenePay\YenePay\Models
  */
@@ -66,6 +68,24 @@ class CheckoutOptions
         __construct9($process, $merchantOrderId, $expiresAfter, $ipnUrl, $successUrl, $failureUrl, $cancelUrl);
         $this->currency = $currency;
     }
+
+
+    /**
+     * An all numeral unique seller code used to uniquely identify a merchant on YenePay
+     *
+     * @return string
+     * @throws SellerCodeNotFoundException
+     */
+    public function getSellerCode()
+    {
+        $sellerCode = config("yenepay.sellerCode");
+        if(is_null($sellerCode)){
+            throw new SellerCodeNotFoundException();
+        }
+
+        return config("yenepay.sellerCode");
+    }
+
 
     /**
      * a string representing the type of checkout process (Enums.php for full list of valid values)
