@@ -1,4 +1,4 @@
-# YenePaySDK - PHP
+# YenePaySDK - Laravel
 
 This library allows you to quickly and easily add YenePay as a payment method to your Laravel Application.
 
